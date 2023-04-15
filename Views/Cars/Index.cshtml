@@ -1,18 +1,48 @@
-@model TModel
+@* @model IEnumerable<Car> *@
+@model IEnumerable<CarsMongoDbDemo.Models.Car>
 
-@{
-    Layout = null;
-}
+<h3 class="text-info fst-italic">Cars List</h3>
+<br/>
 
-<!DOCTYPE html>
+<form asp-action="Index" method="get">
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Id)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.VehicleBrand)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.Name)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.Price)
+            </td>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var car in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => car.Id)
+                </td>
 
-<html>
-<head>
-    <title>title</title>
-</head>
-<body>
-<div>
-      
-</div>
-</body>
-</html>
+                <td>
+                    @Html.DisplayFor(modelItem => car.VehicleBrand)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => car.Name)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => car.Price)
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</form>

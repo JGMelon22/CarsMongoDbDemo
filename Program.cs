@@ -1,4 +1,5 @@
 using CarsMongoDbDemo.Models;
+using CarsMongoDbDemo.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,8 @@ builder.Services.AddControllersWithViews();
 // MongoDb Service
 builder.Services.Configure<CarStoreDatabaseSettings>(
     builder.Configuration.GetSection("CarStoreDatabase"));
+
+builder.Services.AddScoped<CarsService>();
 
 var app = builder.Build();
 
