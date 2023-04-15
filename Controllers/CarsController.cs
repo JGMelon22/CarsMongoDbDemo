@@ -17,7 +17,7 @@ public class CarsController : Controller
     [HttpGet]
     public async Task<IActionResult> Index()
     {
-        var cars = _carsService.GetCarsAsync();
+        var cars = await _carsService.GetCarsAsync();
         return cars != null
             ? await Task.Run(() => View(cars))
             : NoContent();

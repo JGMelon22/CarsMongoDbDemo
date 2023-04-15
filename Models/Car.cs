@@ -10,6 +10,7 @@ public class Car
     public string? Id { get; set; }
 
     [BsonElement("Brand")] public string VehicleBrand { get; set; } = string.Empty!;
+
     public string Name { get; set; } = string.Empty!;
     public int Price { get; set; }
 }

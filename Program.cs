@@ -3,14 +3,14 @@ using CarsMongoDbDemo.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
-
 // MongoDb Service
 builder.Services.Configure<CarStoreDatabaseSettings>(
     builder.Configuration.GetSection("CarStoreDatabase"));
 
-builder.Services.AddScoped<CarsService>();
+builder.Services.AddSingleton<CarsService>();
+
+// Add services to the container.
+builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 

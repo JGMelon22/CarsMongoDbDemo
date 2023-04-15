@@ -22,6 +22,8 @@ public class CarsService
     }
 
     // Get Cars
-    public async Task<List<Car>> GetCarsAsync() =>
-        await _carsCollection.Find(_ => true).ToListAsync();
+    public async Task<List<Car>> GetCarsAsync()
+    {
+        return await _carsCollection.Find(_ => true).ToListAsync();
+    }
 }

@@ -1,0 +1,122 @@
+[
+  {
+    "Brand": "Ford",
+    "Name": "Mustang GT 500",
+    "Price": 6900
+  },
+  {
+    "Brand": "Chevrolet",
+    "Name": "Camaro SS",
+    "Price": 8200
+  },
+  {
+    "Brand": "Dodge",
+    "Name": "Challenger SRT Hellcat",
+    "Price": 11300
+  },
+  {
+    "Brand": "Toyota",
+    "Name": "Supra GR",
+    "Price": 10000
+  },
+  {
+    "Brand": "BMW",
+    "Name": "M5",
+    "Price": 12700
+  },
+  {
+    "Brand": "Mercedes-Benz",
+    "Name": "AMG GT",
+    "Price": 14000
+  },
+  {
+    "Brand": "Nissan",
+    "Name": "GT-R Nismo",
+    "Price": 12900
+  },
+  {
+    "Brand": "Porsche",
+    "Name": "911 GT3",
+    "Price": 17100
+  },
+  {
+    "Brand": "Audi",
+    "Name": "RS 6 Avant",
+    "Price": 14500
+  },
+  {
+    "Brand": "McLaren",
+    "Name": "720S",
+    "Price": 26200
+  },
+  {
+    "Brand": "Ferrari",
+    "Name": "488 GTB",
+    "Price": 27500
+  },
+  {
+    "Brand": "Lamborghini",
+    "Name": "Aventador S",
+    "Price": 34100
+  },
+  {
+    "Brand": "Bugatti",
+    "Name": "Chiron",
+    "Price": 32900
+  },
+  {
+    "Brand": "Koenigsegg",
+    "Name": "Jesko",
+    "Price": 42300
+  },
+  {
+    "Brand": "Pagani",
+    "Name": "Huayra BC",
+    "Price": 37500
+  },
+  {
+    "Brand": "Aston Martin",
+    "Name": "DBS Superleggera",
+    "Price": 24200
+  },
+  {
+    "Brand": "Lotus",
+    "Name": "Exige Sport 410",
+    "Price": 7900
+  },
+  {
+    "Brand": "Mazda",
+    "Name": "MX-5 Miata RF",
+    "Price": 6600
+  },
+  {
+    "Brand": "Subaru",
+    "Name": "WRX STI",
+    "Price": 7100
+  },
+  {
+    "Brand": "Volkswagen",
+    "Name": "Golf R",
+    "Price": 5200
+  },
+  {
+    "Brand": "Alfa Romeo",
+    "Name": "Giulia Quadrifoglio",
+    "Price": 14500
+  },
+  {
+    "Brand": "Genesis",
+    "Name": "G70",
+    "Price": 7200
+  },
+  {
+    "Brand": "Honda",
+    "Name": "Civic Type R",
+    "Price": 4200
+  },
+  {
+    "Brand": "Hyundai",
+    "Name": "Veloster N",
+    "Price": 6400
+  }
+]
