@@ -1,4 +1,5 @@
 using CarsMongoDbDemo.Models;
+using CarsMongoDbDemo.ViewModels.Car;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
@@ -22,8 +23,17 @@ public class CarsService
     }
 
     // Get Cars
-    public async Task<List<Car>> GetCarsAsync()
+    public async Task<List<GetCarViewModel>> GetCarsAsync()
     {
-        return await _carsCollection.Find(_ => true).ToListAsync();
+        var cars = await _carsCollection.Find(_ => true).ToListAsync();
+        var mappedCars = cars.Select(x => new GetCarViewModel()
+        {
+            Id = x.Id,
+            VehicleBrand = x.VehicleBrand,
+            Name = x.Name,
+            Price = x.Price
+        }).ToList();
+
+        return mappedCars;
     }
 }
