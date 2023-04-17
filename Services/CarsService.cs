@@ -36,4 +36,19 @@ public class CarsService
 
         return mappedCars;
     }
+
+    // Get Car By Id
+    public async Task<Car?> GetCarById(string id)
+    {
+        var car = await _carsCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
+        var mappedCar = new Car()
+        {
+            Id = car.Id,
+            VehicleBrand = car.VehicleBrand,
+            Name = car.Name,
+            Price = car.Price
+        };
+
+        return mappedCar;
+    }
 }
