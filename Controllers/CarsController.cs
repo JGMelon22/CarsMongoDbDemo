@@ -22,4 +22,16 @@ public class CarsController : Controller
             ? await Task.Run(() => View(cars))
             : NoContent();
     }
+
+    // [HttpGet("{id:length(24)}")]
+    [HttpGet]
+    public async Task<IActionResult> Details(string id)
+    {
+        if (id == null || id.Length < 24)
+            return NotFound();
+
+        var car = await _carsService.GetCarById(id);
+
+        return await Task.Run(() => View(car));
+    }
 }

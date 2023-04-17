@@ -1,0 +1,31 @@
+@model CarsMongoDbDemo.ViewModels.Car.GetCarViewModel
+
+<h3 class="text-info text-decoration-underline">Car Details</h3>
+<br/>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Details">
+            <div class="form-group">
+                <label asp-for="Id" class="text-white fs-4">Id</label>
+                <input class="form-control" type="text" placeholder="@Html.DisplayFor(model => model.Id)" readonly>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="text-white fs-4">Name</label>
+                <input class="form-control" type="text" placeholder="@Html.DisplayFor(model => model.Name)" readonly>
+            </div>
+            <div class="form-group">
+                <label asp-for="VehicleBrand" class="text-white fs-4">Brand</label>
+                <input class="form-control" type="text" placeholder="@Html.DisplayFor(model => model.VehicleBrand)" readonly>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="text-white fs-4">Price</label>
+                <input class="form-control" type="text" placeholder="@string.Format("{0:c}", Model.Price)" readonly>
+            </div>
+        </form>
+    </div>
+</div>
+<h4></h4>
+<div>
+    <a class="btn btn-sm btn-primary rounded-pill" asp-action="Index">Return to Index</a>
+</div>

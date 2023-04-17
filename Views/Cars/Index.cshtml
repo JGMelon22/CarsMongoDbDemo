@@ -1,8 +1,8 @@
 @model IEnumerable<CarsMongoDbDemo.ViewModels.Car.GetCarViewModel>
 
 <div>
-    <h3 class="text-info fst-italic">Cars List</h3> 
-     <span class="text-light fs-5">Cars Quantity: @Model.Count()</span>
+    <h3 class="text-info fst-italic">Cars List</h3>
+    <span class="text-light fs-5">Cars Quantity: @Model.Count()</span>
 </div>
 
 <br/>
@@ -42,7 +42,10 @@
                     @Html.DisplayFor(modelItem => car.Price)
                 </td> *@
                 <td>
-                    @String.Format("{0:c}", car.Price)
+                    @string.Format("{0:c}", car.Price)
+                </td>
+                <td>
+                    <a class="btn btn-sm btn-info border-1" asp-action="Details" asp-route-id="@car.Id">Details</a>
                 </td>
             </tr>
         }

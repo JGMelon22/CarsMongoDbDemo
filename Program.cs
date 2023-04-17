@@ -1,4 +1,3 @@
-using CarsMongoDbDemo.Models;
 using CarsMongoDbDemo.Services;
 
 var builder = WebApplication.CreateBuilder(args);

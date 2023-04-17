@@ -25,7 +25,7 @@ public class CarsService
     public async Task<List<GetCarViewModel>> GetCarsAsync()
     {
         var cars = await _carsCollection.Find(_ => true).ToListAsync();
-        var mappedCars = cars.Select(x => new GetCarViewModel()
+        var mappedCars = cars.Select(x => new GetCarViewModel
         {
             Id = x.Id,
             VehicleBrand = x.VehicleBrand,
@@ -40,7 +40,10 @@ public class CarsService
     public async Task<GetCarViewModel?> GetCarById(string id)
     {
         var car = await _carsCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
-        var mappedCar = new GetCarViewModel()
+
+        if (car == null) return null;
+
+        var mappedCar = new GetCarViewModel
         {
             Id = car.Id,
             VehicleBrand = car.VehicleBrand,
@@ -54,7 +57,7 @@ public class CarsService
     // Add new Car
     public async Task AddCar(AddCarViewModel newCar)
     {
-        var mappedCar = new Car()
+        var mappedCar = new Car
         {
             VehicleBrand = newCar.VehicleBrand,
             Name = newCar.Name,
@@ -65,25 +68,45 @@ public class CarsService
     }
 
     // Update Car
-    public async Task UpdateCar(UpdateCarViewModel updatedCar)
+    public async Task<GetCarViewModel> UpdateCar(UpdateCarViewModel updatedCar)
     {
         var car = await _carsCollection.Find(x => x.Id == updatedCar.Id).FirstOrDefaultAsync();
 
-        if (car == null)
-        {
-            throw new Exception("Car not found!");
-        }
+        if (car == null) return null;
 
         car.Name = updatedCar.Name;
         car.VehicleBrand = updatedCar.VehicleBrand;
         car.Price = updatedCar.Price;
 
         await _carsCollection.ReplaceOneAsync(x => x.Id == updatedCar.Id, car);
+
+        var mappedCar = new GetCarViewModel
+        {
+            Name = updatedCar.Name,
+            VehicleBrand = updatedCar.VehicleBrand,
+            Price = updatedCar.Price
+        };
+
+        return mappedCar;
     }
 
     // Remove Car
-    public async Task RemoveCar(string id)
+    public async Task<GetCarViewModel> RemoveCar(string id)
     {
-        await _carsCollection.DeleteOneAsync(x => x.Id == id);
+        // await _carsCollection.DeleteOneAsync(x => x.Id == id);
+        var deletedCar = await _carsCollection.FindOneAndDeleteAsync(x => x.Id == id);
+
+        if (deletedCar == null)
+            return null;
+
+        var mappedCar = new GetCarViewModel
+        {
+            Id = deletedCar.Id,
+            Name = deletedCar.Name,
+            VehicleBrand = deletedCar.VehicleBrand,
+            Price = deletedCar.Price
+        };
+
+        return mappedCar;
     }
 }
