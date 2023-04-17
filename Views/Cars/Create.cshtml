@@ -1,0 +1,38 @@
+@model CarsMongoDbDemo.ViewModels.Car.AddCarViewModel
+<hr/>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control"/>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VehicleBrand" class="control-label"></label>
+                <input asp-for="VehicleBrand" class="form-control"/>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" type="number" class="form-control"/>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <h4>
+                    <input type="submit" value="Create"class="btn btn-success border-1 rounded-1"/>
+                </h4>
+            </div>
+        </form>
+    </div>
+</div>
+<h4></h4>
+<div>
+    <a class="btn btn-primary border-1 rounded-1" asp-action="Index">Return to List</a>
+</div>
+
+@* Model Validation via JS *@
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

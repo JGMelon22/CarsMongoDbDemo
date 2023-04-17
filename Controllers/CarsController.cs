@@ -1,4 +1,5 @@
 using CarsMongoDbDemo.Services;
+using CarsMongoDbDemo.ViewModels.Car;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarsMongoDbDemo.Controllers;
@@ -47,6 +48,24 @@ public class CarsController : Controller
             return NotFound();
 
         return await Task.Run(() => View(car));
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Create()
+    {
+        return await Task.Run(View);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Create(AddCarViewModel newCar)
+    {
+        if (!ModelState.IsValid)
+            return View(nameof(Create));
+
+        await _carsService.AddCar(newCar);
+
+        return await Task.Run(() => RedirectToAction(nameof(Index)));
     }
 
     [HttpPost]

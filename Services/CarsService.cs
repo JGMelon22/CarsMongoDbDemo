@@ -31,7 +31,7 @@ public class CarsService
             VehicleBrand = x.VehicleBrand,
             Name = x.Name,
             Price = x.Price
-        }).Take(15).ToList();
+        }).ToList();
 
         return mappedCars;
     }
