@@ -23,6 +23,7 @@
             <td>
                 @Html.DisplayNameFor(model => model.Price)
             </td>
+            <td/>
         </tr>
         </thead>
         <tbody>
@@ -38,14 +39,12 @@
                 <td>
                     @Html.DisplayFor(modelItem => car.Name)
                 </td>
-                @* <td>
-                    @Html.DisplayFor(modelItem => car.Price)
-                </td> *@
                 <td>
-                    @string.Format("{0:c}", car.Price)
+                    @($"{car.Price:c}") @* Equivalent to @String.Format("{0:c}", car.Price) *@
                 </td>
                 <td>
                     <a class="btn btn-sm btn-info border-1" asp-action="Details" asp-route-id="@car.Id">Details</a>
+                    <a class="btn btn-sm btn-danger border-1" asp-action="Delete" asp-route-id="@car.Id">Delete</a>
                 </td>
             </tr>
         }

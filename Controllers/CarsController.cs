@@ -34,4 +34,29 @@ public class CarsController : Controller
 
         return await Task.Run(() => View(car));
     }
+
+    // Call view to remove
+    [HttpGet]
+    public async Task<IActionResult> Delete(string id)
+    {
+        var car = await _carsService.GetCarById(id);
+        if (id == null || id.Length < 24 || id.Length > 24)
+            return NotFound();
+
+        return await Task.Run(() => View(car));
+    }
+
+    [HttpPost]
+    [ActionName("Delete")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteConfirmed(string id)
+    {
+        var carToRemove = await _carsService.RemoveCar(id);
+        if (carToRemove == null)
+            return NotFound();
+
+        await _carsService.RemoveCar(id);
+
+        return await Task.Run(() => RedirectToAction(nameof(Index)));
+    }
 }

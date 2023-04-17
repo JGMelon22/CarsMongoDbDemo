@@ -1,8 +1,6 @@
 @model CarsMongoDbDemo.ViewModels.Car.GetCarViewModel
 
-<h3 class="text-info text-decoration-underline">Car Details</h3>
-<br/>
-
+<h4 class="alert alert-dismissible alert-warning w-50">Are you sure you want to delete @Model.Name from database?</h4>
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Details">
@@ -20,12 +18,17 @@
             </div>
             <div class="form-group">
                 <label asp-for="Price" class="text-white fs-4">Price</label>
-                <input class="form-control" type="text" placeholder="@string.Format("{0:c}", Model.Price)" readonly>
+                <input class="form-control" type="text" placeholder="@($"{Model.Price:c}")" readonly>
             </div>
         </form>
     </div>
 </div>
 <h4></h4>
-<div>
-    <a class="btn btn-primary rounded-1" asp-action="Index">Return to Index</a>
-</div>
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id"/>
+    <button type="submit" class="btn btn-danger rounded-1"
+            onclick="return confirm('Confirm delete this item?')">
+        Delete
+    </button>
+    <a class="btn btn-info border-1" asp-action="Index">Return to Index</a>
+</form>
