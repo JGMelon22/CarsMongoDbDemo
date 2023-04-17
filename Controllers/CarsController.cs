@@ -15,9 +15,12 @@ public class CarsController : Controller
 
     // Call cars index view with all results!
     [HttpGet]
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(string sortOrder)
     {
-        var cars = await _carsService.GetCarsAsync();
+        var sortingService = new SortingService(_carsService); // Sort service
+        ViewBag.BrandSortParam = string.IsNullOrEmpty(sortOrder) ? "brand_desc" : "";
+
+        var cars = await sortingService.SortCars(sortOrder);
         return cars != null
             ? await Task.Run(() => View(cars))
             : NoContent();

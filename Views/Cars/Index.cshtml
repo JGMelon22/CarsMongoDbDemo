@@ -15,7 +15,7 @@
                 @Html.DisplayNameFor(model => model.Id)
             </td>
             <td>
-                @Html.DisplayName("Vehicle Brand")
+                <a class="text-white" asp-action="Index" asp-route-sortOrder="@ViewBag.BrandSortParam">Vehicle Brand</a>
             </td>
             <td>
                 @Html.DisplayNameFor(model => model.Name)
