@@ -1,4 +1,3 @@
-using CarsMongoDbDemo.Models;
 using CarsMongoDbDemo.ViewModels.Car;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
@@ -38,10 +37,10 @@ public class CarsService
     }
 
     // Get Car By Id
-    public async Task<Car?> GetCarById(string id)
+    public async Task<GetCarViewModel?> GetCarById(string id)
     {
         var car = await _carsCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
-        var mappedCar = new Car()
+        var mappedCar = new GetCarViewModel()
         {
             Id = car.Id,
             VehicleBrand = car.VehicleBrand,
@@ -50,5 +49,41 @@ public class CarsService
         };
 
         return mappedCar;
+    }
+
+    // Add new Car
+    public async Task AddCar(AddCarViewModel newCar)
+    {
+        var mappedCar = new Car()
+        {
+            VehicleBrand = newCar.VehicleBrand,
+            Name = newCar.Name,
+            Price = newCar.Price
+        };
+
+        await _carsCollection.InsertOneAsync(mappedCar);
+    }
+
+    // Update Car
+    public async Task UpdateCar(UpdateCarViewModel updatedCar)
+    {
+        var car = await _carsCollection.Find(x => x.Id == updatedCar.Id).FirstOrDefaultAsync();
+
+        if (car == null)
+        {
+            throw new Exception("Car not found!");
+        }
+
+        car.Name = updatedCar.Name;
+        car.VehicleBrand = updatedCar.VehicleBrand;
+        car.Price = updatedCar.Price;
+
+        await _carsCollection.ReplaceOneAsync(x => x.Id == updatedCar.Id, car);
+    }
+
+    // Remove Car
+    public async Task RemoveCar(string id)
+    {
+        await _carsCollection.DeleteOneAsync(x => x.Id == id);
     }
 }
