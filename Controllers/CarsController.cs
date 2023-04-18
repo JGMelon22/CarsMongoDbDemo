@@ -39,17 +39,6 @@ public class CarsController : Controller
         return await Task.Run(() => View(car));
     }
 
-    // Call view to remove
-    [HttpGet]
-    public async Task<IActionResult> Delete(string id)
-    {
-        var car = await _carsService.GetCarById(id);
-        if (id == null || id.Length < 24 || id.Length > 24)
-            return NotFound();
-
-        return await Task.Run(() => View(car));
-    }
-
     [HttpGet]
     public async Task<IActionResult> Create()
     {
@@ -66,6 +55,28 @@ public class CarsController : Controller
         await _carsService.AddCar(newCar);
 
         return await Task.Run(() => RedirectToAction(nameof(Index)));
+    }
+
+    // Update Car
+    [HttpGet]
+    public async Task<IActionResult> Edit(string id)
+    {
+        var car = await _carsService.GetCarById(id);
+        if (id == null || id.Length < 24 || id.Length > 24)
+            return NotFound();
+
+        return await Task.Run(() => View(car));
+    }
+
+    // Call view to remove
+    [HttpGet]
+    public async Task<IActionResult> Delete(string id)
+    {
+        var car = await _carsService.GetCarById(id);
+        if (id == null || id.Length < 24 || id.Length > 24)
+            return NotFound();
+
+        return await Task.Run(() => View(car));
     }
 
     [HttpPost]
