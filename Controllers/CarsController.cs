@@ -26,7 +26,7 @@ public class CarsController : Controller
             ? await Task.Run(() => View(cars))
             : NoContent();
     }
-    
+
     [HttpGet]
     public async Task<IActionResult> Details(string id)
     {
@@ -65,6 +65,17 @@ public class CarsController : Controller
             return NotFound();
 
         return await Task.Run(() => View(car));
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Edit(UpdateCarViewModel updateCarViewModel)
+    {
+        if (!ModelState.IsValid)
+            return View(nameof(Edit));
+
+        await _carsService.UpdateCar(updateCarViewModel);
+
+        return await Task.Run(() => RedirectToAction(nameof(Index)));
     }
 
     // Call view to remove
