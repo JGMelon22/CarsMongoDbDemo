@@ -20,12 +20,13 @@
             </div>
             <div class="form-group">
                 <label asp-for="Price" class="text-white fs-4">Price</label>
-                <input class="form-control" type="text" placeholder="@string.Format("{0:c}", Model.Price)" readonly>
+                <input class="form-control" type="text" placeholder="@($"{Model.Price:c}")" readonly>
             </div>
         </form>
     </div>
 </div>
 <h4></h4>
 <div>
-    <a class="btn btn-primary rounded-1" asp-action="Index">Return to Index</a>
+    <a class="btn btn-primary rounded-1 mb-1" asp-action="Index">Return to Index</a>
+    <a class="btn btn-info border-1" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
 </div>
