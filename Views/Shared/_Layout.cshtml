@@ -21,14 +21,14 @@
             </button>
             <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                 <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item">
-                        <a class="nav-link active" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="CarsList" class="nav-link active" asp-area="" asp-controller="Cars" asp-action="Index">List Cars</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white bg-success border-1 rounded-1" asp-area="" asp-controller="Cars" asp-action="Create">Add new Car</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle bg-light border-1 border-primary rounded-1" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cars</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" asp-controller="Cars" asp-action="Index">List Cars</a>
+                            <a class="dropdown-item" asp-controller="ExcelFiles" asp-action="Index">Cars Info Report</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-white bg-success border-1 rounded-1" asp-controller="Cars" asp-action="Create">Add a new Car</a>
+                        </div>
                     </li>
                 </ul>
             </div>

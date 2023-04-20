@@ -1,0 +1,25 @@
+@model IEnumerable<CarsMongoDbDemo.ViewModels.XlsxFile.XlsxFileViewModel>
+
+<h4 class="text-info">Excel Reports</h4>
+<div>
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>
+                @Html.DisplayName("File Name")
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @* @Html.DisplayFor(modelItem => item.XlsxFileName) *@
+                    @($"{item.XlsxFileName.ToUpperInvariant()}")
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
