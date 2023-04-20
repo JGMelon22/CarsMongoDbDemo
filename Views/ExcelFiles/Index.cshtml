@@ -18,6 +18,9 @@
                     @* @Html.DisplayFor(modelItem => item.XlsxFileName) *@
                     @($"{item.XlsxFileName.ToUpperInvariant()}")
                 </td>
+                <td class="text-center" onclick="return confirm('Confirm delete this item?')">
+                    @Html.ActionLink("Delete", "DeleteFile", new { fileName = item.XlsxFileName }, new { @class = "text-danger" })
+                </td>
             </tr>
         }
         </tbody>

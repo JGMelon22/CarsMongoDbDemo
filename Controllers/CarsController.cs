@@ -1,6 +1,5 @@
 using CarsMongoDbDemo.Services;
 using CarsMongoDbDemo.ViewModels.Car;
-using Microsoft.AspNetCore.Mvc;
 
 namespace CarsMongoDbDemo.Controllers;
 
