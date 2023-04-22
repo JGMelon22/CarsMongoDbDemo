@@ -45,6 +45,17 @@ public class FileService
         await MiniExcel.SaveAsAsync(folderPath, rowsData);
     }
 
+    // Download file
+    public async Task<byte[]> DownloadFile(string fileName)
+    {
+        var path = Path.Combine(Path.Combine(Environment.CurrentDirectory, "Files" + Path.DirectorySeparatorChar) +
+                                fileName);
+
+        // Le o arquivo
+        var bytes = await File.ReadAllBytesAsync(path);
+        return await Task.FromResult(bytes);
+    }
+
     public void DeleteFile(string fileName)
     {
         // File to remove path

@@ -21,19 +21,28 @@ public class ExcelFilesController : Controller
     }
 
     [HttpGet]
-    public IActionResult DeleteFile(string fileName)
+    public async Task<IActionResult> CreateFile()
     {
         var fileService = new FileService(_carsService);
-        fileService.DeleteFile(fileName);
+        await fileService.CreateReport();
 
         return RedirectToAction("Index", "ExcelFiles");
     }
 
     [HttpGet]
-    public async Task<IActionResult> CreateFile()
+    public async Task<IActionResult> DownloadFile(string fileName)
     {
         var fileService = new FileService(_carsService);
-        await fileService.CreateReport();
+        var bytes = await fileService.DownloadFile(fileName);
+
+        return File(bytes, "application/octet-steam", fileName);
+    }
+
+    [HttpGet]
+    public IActionResult DeleteFile(string fileName)
+    {
+        var fileService = new FileService(_carsService);
+        fileService.DeleteFile(fileName);
 
         return RedirectToAction("Index", "ExcelFiles");
     }

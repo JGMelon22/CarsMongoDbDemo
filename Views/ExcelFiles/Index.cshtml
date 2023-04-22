@@ -8,6 +8,9 @@
             <th>
                 @Html.DisplayName("File Name")
             </th>
+            <th class="text-center">
+                Options
+            </th>
         </tr>
         </thead>
         <tbody>
@@ -18,9 +21,9 @@
                     @* @Html.DisplayFor(modelItem => item.XlsxFileName) *@
                     @($"{item.XlsxFileName.ToUpperInvariant()}")
                 </td>
-                <td class="text-center" onclick="return confirm('Confirm delete this item?')">
-                    @Html.ActionLink("Delete", "DeleteFile", new { fileName = item.XlsxFileName }, new { @class = "button fs-6 btn-sm btn-danger border-danger border-1 rounded m-1" })
-                    @Html.ActionLink("Download", "DownloadFile", new { fileName = item.XlsxFileName }, new { @class = "button fs-6 btn-sm btn-success border-success border-1 rounded" })
+                <td class="text-center">
+                    @Html.ActionLink("Delete", "DeleteFile", new { fileName = item.XlsxFileName }, new { @class = "button fs-6 btn-sm btn-danger border-danger border-1 rounded m-1", onclick = "return confirm('Confirm delete this item?')" })
+                    @Html.ActionLink("Download", "DownloadFile", new { fileName = item.XlsxFileName }, new { @class = "button fs-6 btn-sm btn-success border-success border-1 rounded", id = "DownloadFileButton" })
                 </td>
             </tr>
         }
