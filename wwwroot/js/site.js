@@ -6,9 +6,5 @@ let btnListCars = document.getElementById("CarsList");
 let btnLoading = document.getElementById("LoadingButton");
 
 btnListCars.onclick = function () {
-    btnLoading.style.display = "block"
+    btnLoading.style.display = "block";
 }
-    
-
-
-

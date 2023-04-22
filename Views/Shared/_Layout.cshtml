@@ -26,7 +26,7 @@
                         <div class="dropdown-menu">
                             <a class="dropdown-item" asp-controller="Cars" asp-action="Index">List Cars</a>
                             <a class="dropdown-item" asp-controller="ExcelFiles" asp-action="Index">List Car Info Report</a>
-                            <a class="dropdown-item" asp-controller="ExcelFiles" asp-action="CreateFile">Create Car Info Report</a>
+                            <a class="dropdown-item" onclick="return confirm('Confirm delete this item?')" asp-controller="ExcelFiles" asp-action="CreateFile">Create Car Info Report</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" a:hov asp-controller="Cars" asp-action="Create">Add a new Car</a>
                         </div>

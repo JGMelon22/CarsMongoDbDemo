@@ -20,7 +20,7 @@ public class SortingService
             VehicleBrand = x.VehicleBrand,
             Name = x.Name,
             Price = x.Price
-        }).ToList().OrderBy(x => x.Id);
+        }).ToList().OrderBy(x => x.VehicleBrand);
 
         switch (sortOrder)
         {

@@ -23,7 +23,9 @@
             <td>
                 @Html.DisplayNameFor(model => model.Price)
             </td>
-            <td/>
+            <td class="text-center">
+                Options
+            </td>
         </tr>
         </thead>
         <tbody>
@@ -43,9 +45,9 @@
                     @($"{car.Price:c}") @* Equivalent to @String.Format("{0:c}", car.Price) *@
                 </td>
                 <td class="text-center">
-                    <a class="btn btn-sm btn-info border-1" asp-action="Details" asp-route-id="@car.Id">Details</a>
-                    <a class="btn btn-sm btn-danger border-1" asp-action="Delete" asp-route-id="@car.Id">Delete</a>
-                    <a class="btn btn-sm btn-warning border-1" asp-action="Edit" asp-route-id="@car.Id">Edit</a>
+                    <a class="btn btn-sm btn-info border-1 m-1" asp-action="Details" asp-route-id="@car.Id">Details</a>
+                    <a class="btn btn-sm btn-danger border-1 m-1" asp-action="Delete" asp-route-id="@car.Id">Delete</a>
+                    <a class="btn btn-sm btn-warning border-1" asp-action="Edit" asp-route-id="@car.Id">&nbsp;Edit&nbsp;</a>
                 </td>
             </tr>
         }
