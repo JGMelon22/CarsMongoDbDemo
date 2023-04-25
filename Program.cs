@@ -8,6 +8,8 @@ builder.Services.Configure<CarStoreDatabaseSettings>(
 
 builder.Services.AddSingleton<CarsService>();
 
+// Toast 
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 

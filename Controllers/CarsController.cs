@@ -21,6 +21,7 @@ public class CarsController : Controller
         ViewBag.BrandSortParam = string.IsNullOrEmpty(sortOrder) ? "brand_desc" : "";
 
         var cars = await sortingService.SortCars(sortOrder);
+
         return cars != null
             ? await Task.Run(() => View(cars))
             : NoContent();
@@ -49,6 +50,7 @@ public class CarsController : Controller
     {
         if (!ModelState.IsValid)
             return View(nameof(Create));
+
 
         await _carsService.AddCar(newCar);
 
