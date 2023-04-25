@@ -8,6 +8,9 @@
             <th>
                 @Html.DisplayName("File Name")
             </th>
+            <th>
+                @Html.DisplayName("File Creation Date")
+            </th>
             <th class="text-center">
                 Options
             </th>
@@ -18,8 +21,10 @@
         {
             <tr>
                 <td>
-                    @* @Html.DisplayFor(modelItem => item.XlsxFileName) *@
                     @($"{item.XlsxFileName.ToUpperInvariant()}")
+                </td>
+                <td>
+                    @($"{item.XlsxDateAndTime.ToString("yyyy-MM-dd: HH:mm:ss")}")
                 </td>
                 <td class="text-center">
                     @Html.ActionLink("Delete", "DeleteFile", new { fileName = item.XlsxFileName }, new { @class = "button fs-6 btn-sm btn-danger border-danger border-1 rounded m-1", onclick = "return confirm('Confirm delete this item?')" })

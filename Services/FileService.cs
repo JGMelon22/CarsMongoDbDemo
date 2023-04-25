@@ -26,7 +26,8 @@ public class FileService
         foreach (var item in filePath)
             excelFiles.Add(new XlsxFileViewModel
             {
-                XlsxFileName = Path.GetFileName(item)
+                XlsxFileName = Path.GetFileName(item),
+                XlsxDateAndTime = File.GetCreationTime(item) // Get file time stamp created
             });
 
         return await Task.FromResult(excelFiles.ToList());

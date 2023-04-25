@@ -1,6 +1,7 @@
 namespace CarsMongoDbDemo.ViewModels.XlsxFile;
 
-public class XlsxFileViewModel
+public record XlsxFileViewModel
 {
-    public string XlsxFileName { get; set; } = string.Empty!;
+    public string XlsxFileName { get; init; } = string.Empty!;
+    public DateTime XlsxDateAndTime { get; init; }
 }
