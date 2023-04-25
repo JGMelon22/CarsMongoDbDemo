@@ -1,3 +1,4 @@
+using CarsMongoDbDemo.Models.Validators;
 using CarsMongoDbDemo.Services;
 using CarsMongoDbDemo.ViewModels.Car;
 using FluentValidation;
@@ -13,7 +14,8 @@ builder.Services.AddSingleton<CarsService>();
 
 // Fluent Validation
 builder.Services.AddFluentValidationAutoValidation();
-builder.Services.AddScoped<IValidator<AddCarViewModel>, CarValidator>();
+builder.Services.AddScoped<IValidator<AddCarViewModel>, AddCarValidator>();
+builder.Services.AddScoped<IValidator<UpdateCarViewModel>, UpdateCarValidator>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
