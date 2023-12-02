@@ -13,11 +13,11 @@ public class ExcelFilesController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> Index()
+    public IActionResult Index()
     {
         var fileService = new FileService(_carsService);
-        var files = await fileService.GetXlsxFile();
-        return await Task.Run(() => View(files));
+        var files = fileService.GetXlsxFile();
+        return View(files);
     }
 
     [HttpGet]
