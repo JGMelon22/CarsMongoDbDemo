@@ -8,13 +8,29 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
-        <PackageReference Include="MiniExcel" Version="1.31.2" />
-        <PackageReference Include="MongoDB.Driver" Version="2.22.0" />
+        <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0"/>
+        <PackageReference Include="MiniExcel" Version="1.31.2"/>
+        <PackageReference Include="MongoDB.Driver" Version="2.22.0"/>
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Files\" />
+        <Folder Include="Files\"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Remove="Configuration\**"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Remove="Configuration\**"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Remove="Configuration\**"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Remove="Configuration\**"/>
     </ItemGroup>
 
 </Project>
