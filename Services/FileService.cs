@@ -12,7 +12,7 @@ public class FileService
         _carsService = carsService;
     }
 
-    public async Task<List<XlsxFileViewModel>> GetXlsxFile()
+    public List<XlsxFileViewModel> GetXlsxFile()
     {
         var path = Path.Combine(Environment.CurrentDirectory, "Files");
 
@@ -30,7 +30,7 @@ public class FileService
                 XlsxDateAndTime = File.GetCreationTime(item) // Get file time stamp created
             });
 
-        return await Task.FromResult(excelFiles.ToList());
+        return excelFiles.ToList();
     }
 
     // Create report
@@ -54,7 +54,7 @@ public class FileService
 
         // Le o arquivo
         var bytes = await File.ReadAllBytesAsync(path);
-        return await Task.FromResult(bytes);
+        return bytes;
     }
 
     public void DeleteFile(string fileName)

@@ -96,8 +96,7 @@ public class CarsService
         // await _carsCollection.DeleteOneAsync(x => x.Id == id);
         var deletedCar = await _carsCollection.FindOneAndDeleteAsync(x => x.Id == id);
 
-        if (deletedCar == null)
-            return null;
+        if (deletedCar == null) return null;
 
         var mappedCar = new GetCarViewModel
         {
