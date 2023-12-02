@@ -9,5 +9,5 @@ public record GetCarViewModel
     [BsonElement("Brand")] public string VehicleBrand { get; init; } = string.Empty!;
 
     public string Name { get; init; } = string.Empty!;
-    public int Price { get; init; }
+    public double Price { get; init; }
 }

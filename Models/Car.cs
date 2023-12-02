@@ -4,10 +4,10 @@ public class Car
 {
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
-    public string? Id { get; set; }
+    public string? Id { get; set; } 
 
-    [BsonElement("Brand")] public string VehicleBrand { get; set; } = string.Empty!;
+    [BsonElement("Brand")] public required string VehicleBrand { get; set; }
 
-    public string Name { get; set; } = string.Empty!;
-    public int Price { get; set; }
+    public required string Name { get; set; } 
+    public double Price { get; set; }
 }
