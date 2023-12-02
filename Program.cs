@@ -13,8 +13,8 @@ builder.Services.Configure<CarStoreDatabaseSettings>(
 builder.Services.AddSingleton<CarsService>();
 
 // Fluent Validation
-builder.Services.AddFluentValidationAutoValidation();
-builder.Services.AddScoped<IValidator<AddCarViewModel>, AddCarValidator>();
+builder.Services.AddFluentValidationAutoValidation(); // Server Side
+builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters(); // Client Sidebuilder.Services.AddScoped<IValidator<AddCarViewModel>, AddCarValidator>();
 builder.Services.AddScoped<IValidator<UpdateCarViewModel>, UpdateCarValidator>();
 
 // Add services to the container.
