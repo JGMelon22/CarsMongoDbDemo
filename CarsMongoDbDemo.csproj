@@ -1,20 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net7.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <UserSecretsId>9e0c3eda-1e9d-4569-b9b6-3dd4e4c10c1a</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0"/>
-        <PackageReference Include="MiniExcel" Version="1.30.2"/>
-        <PackageReference Include="MongoDB.Driver" Version="2.19.1"/>
+        <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+        <PackageReference Include="MiniExcel" Version="1.31.2" />
+        <PackageReference Include="MongoDB.Driver" Version="2.22.0" />
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Files\"/>
+        <Folder Include="Files\" />
     </ItemGroup>
 
 </Project>
