@@ -2,9 +2,14 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
-let btnListCars = document.getElementById("CarsList");
-let btnLoading = document.getElementById("LoadingButton");
+let carListButton = document.getElementById("carListButton");
+let reportButton = document.getElementById("reportButton");
+let loadingSpinner = document.getElementById("loading-spinner");
 
-btnListCars.onclick = function () {
-    btnLoading.style.display = "block";
+carListButton.onclick = function () {
+    loadingSpinner.style.display = "block";
+}
+
+reportButton.onclick = function () {
+    loadingSpinner.style.display = "block";
 }
