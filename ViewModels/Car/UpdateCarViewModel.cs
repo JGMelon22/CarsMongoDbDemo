@@ -6,7 +6,7 @@ public record UpdateCarViewModel
     [BsonRepresentation(BsonType.ObjectId)]
     public string? Id { get; init; }
 
-    [BsonElement("Brand")] public string VehicleBrand { get; init; } = string.Empty!;
-    public string Name { get; init; } = string.Empty!;
+    [BsonElement("Brand")] public required string VehicleBrand { get; init; } 
+    public required string Name { get; init; } 
     public double Price { get; init; }
 }
