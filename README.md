@@ -2,12 +2,14 @@
 
 Demo MVC app using made using ASP .NET Core and MongoDB to display a list of cars
 
-<h3>Use NuGet Packages</h3>
+<h3>Used NuGet Packages</h3>
+
 - MongoDB.Driver <br />
 - FluentValidation <br />
 - MiniExcel <br />
 
 <h3>Used Tools</h3>
+
 - .NET 8 (C# 12) <br />
 - MongoDB <br />
 

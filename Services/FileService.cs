@@ -41,9 +41,9 @@ public class FileService
             $"{Guid.NewGuid()}.xlsx");
 
         if (!Directory.Exists(folderPath)) Directory.CreateDirectory(folderPath);
-        
+
         var data = await _carsService.GetCarsAsync();
-        var rowsData = data.Select(item => new
+        var rowsData = data.Data?.Select(item => new
             { item.Id, item.Name, item.VehicleBrand, Price = item.Price.ToString() });
 
         await MiniExcel.SaveAsAsync(filePath, rowsData);

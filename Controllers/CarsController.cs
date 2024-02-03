@@ -37,18 +37,16 @@ public class CarsController : Controller
     [HttpGet]
     public async Task<IActionResult> Details(string id)
     {
-        if (id == null || id.Length < 24)
-            return NotFound();
-
         var car = await _carsService.GetCarById(id);
-
-        return await Task.Run(() => View(car));
+        return car.Data != null
+            ? View(car.Data)
+            : NotFound();
     }
 
     [HttpGet]
-    public async Task<IActionResult> Create()
+    public IActionResult Create()
     {
-        return await Task.Run(View);
+        return View();
     }
 
     [HttpPost]
@@ -63,8 +61,7 @@ public class CarsController : Controller
         }
 
         await _carsService.AddCar(newCar);
-
-        return await Task.Run(() => RedirectToAction(nameof(Index)));
+        return RedirectToAction(nameof(Index));
     }
 
     // Update Car
@@ -72,14 +69,13 @@ public class CarsController : Controller
     public async Task<IActionResult> Edit(string id)
     {
         var car = await _carsService.GetCarById(id);
-        if (id == null || id.Length < 24 || id.Length > 24)
-            return NotFound();
-
-        return await Task.Run(() => View(car));
+        return car.Data != null
+            ? View(car.Data)
+            : NoContent();
     }
 
     [HttpPost]
-    public async Task<IActionResult> Edit(CarInputViewModel carInputViewModel)
+    public async Task<IActionResult> Edit(string id, CarInputViewModel carInputViewModel)
     {
         var result = await _updateCarViewModel.ValidateAsync(carInputViewModel);
         if (!result.IsValid)
@@ -88,7 +84,7 @@ public class CarsController : Controller
             return View(nameof(Edit));
         }
 
-        await _carsService.UpdateCar(carInputViewModel);
+        await _carsService.UpdateCar(id, carInputViewModel);
 
         return await Task.Run(() => RedirectToAction(nameof(Index)));
     }
@@ -98,10 +94,10 @@ public class CarsController : Controller
     public async Task<IActionResult> Delete(string id)
     {
         var car = await _carsService.GetCarById(id);
-        if (id == null || id.Length < 24 || id.Length > 24)
-            return NotFound();
 
-        return await Task.Run(() => View(car));
+        return car.Data != null
+            ? View(car.Data)
+            : NotFound();
     }
 
     [HttpPost]
@@ -109,12 +105,10 @@ public class CarsController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(string id)
     {
-        var carToRemove = await _carsService.RemoveCar(id);
-        if (carToRemove == null)
-            return NotFound();
+        var car = await _carsService.RemoveCar(id);
 
-        await _carsService.RemoveCar(id);
-
-        return await Task.Run(() => RedirectToAction(nameof(Index)));
+        return car.Success
+            ? RedirectToAction(nameof(Index))
+            : BadRequest();
     }
 }

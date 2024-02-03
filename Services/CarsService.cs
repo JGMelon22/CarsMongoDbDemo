@@ -22,90 +22,167 @@ public class CarsService
     }
 
     // Get Cars
-    public async Task<List<CarResultViewModel>> GetCarsAsync()
+    public async Task<ServiceResponse<List<CarResultViewModel>>> GetCarsAsync()
     {
-        var cars = await _carsCollection.Find(_ => true).ToListAsync();
-        var mappedCars = cars.Select(x => new CarResultViewModel
-        {
-            Id = x.Id,
-            VehicleBrand = x.VehicleBrand,
-            Name = x.Name,
-            Price = x.Price
-        }).ToList();
+        var serviceResponse = new ServiceResponse<List<CarResultViewModel>>();
 
-        return mappedCars;
+        try
+        {
+            var cars = await _carsCollection.Find(_ => true).ToListAsync();
+
+            if (cars is null)
+                throw new Exception("Cars list is empty!");
+
+            var carsMapped = new List<CarResultViewModel>();
+
+            foreach (var car in cars)
+            {
+                var carResult = new CarResultViewModel
+                {
+                    Id = car.Id,
+                    VehicleBrand = car.VehicleBrand,
+                    Name = car.Name,
+                    Price = car.Price
+                };
+
+                carsMapped.Add(carResult);
+            }
+
+            serviceResponse.Data = carsMapped;
+        }
+        catch (Exception ex)
+        {
+            serviceResponse.Message = ex.Message;
+            serviceResponse.Success = false;
+        }
+
+        return serviceResponse;
     }
 
     // Get Car By Id
-    public async Task<CarResultViewModel?> GetCarById(string id)
+    public async Task<ServiceResponse<CarResultViewModel?>> GetCarById(string id)
     {
-        var car = await _carsCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
+        var serviceResponse = new ServiceResponse<CarResultViewModel>();
 
-        if (car == null) return null;
-
-        var mappedCar = new CarResultViewModel
+        try
         {
-            Id = car.Id,
-            VehicleBrand = car.VehicleBrand,
-            Name = car.Name,
-            Price = car.Price
-        };
+            var car = await _carsCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
 
-        return mappedCar;
+            if (car is null)
+                throw new Exception($"Car with id {id} not found!");
+
+            var mappedCar = new CarResultViewModel
+            {
+                Id = car.Id,
+                VehicleBrand = car.VehicleBrand,
+                Name = car.Name,
+                Price = car.Price
+            };
+
+            serviceResponse.Data = mappedCar;
+        }
+        catch (Exception ex)
+        {
+            serviceResponse.Message = ex.Message;
+            serviceResponse.Success = false;
+        }
+
+        return serviceResponse!;
     }
 
     // Add new Car
-    public async Task AddCar(CarInputViewModel newCar)
+    public async Task<ServiceResponse<CarResultViewModel>> AddCar(CarInputViewModel newCar)
     {
-        var mappedCar = new Car
-        {
-            VehicleBrand = newCar.VehicleBrand,
-            Name = newCar.Name,
-            Price = newCar.Price
-        };
+        var serviceResponse = new ServiceResponse<CarResultViewModel>();
 
-        await _carsCollection.InsertOneAsync(mappedCar);
+        try
+        {
+            var car = new Car
+            {
+                VehicleBrand = newCar.VehicleBrand,
+                Name = newCar.Name,
+                Price = newCar.Price
+            };
+
+            await _carsCollection.InsertOneAsync(car);
+
+            var mappedCar = new CarResultViewModel
+            {
+                Id = car.Id,
+                VehicleBrand = car.VehicleBrand,
+                Name = car.Name,
+                Price = car.Price
+            };
+
+            serviceResponse.Data = mappedCar;
+        }
+
+        catch (Exception ex)
+        {
+            serviceResponse.Message = ex.Message;
+            serviceResponse.Success = false;
+        }
+
+        return serviceResponse;
     }
 
     // Update Car
-    public async Task<CarResultViewModel> UpdateCar(CarInputViewModel updatedCarInput)
+    public async Task<ServiceResponse<CarResultViewModel>> UpdateCar(string id, CarInputViewModel updatedCarInput)
     {
-        var car = await _carsCollection.Find(x => x.Id == updatedCarInput.Id).FirstOrDefaultAsync();
+        var serviceResponse = new ServiceResponse<CarResultViewModel>();
 
-        if (car == null) return null;
-
-        car.Name = updatedCarInput.Name;
-        car.VehicleBrand = updatedCarInput.VehicleBrand;
-        car.Price = updatedCarInput.Price;
-
-        await _carsCollection.ReplaceOneAsync(x => x.Id == updatedCarInput.Id, car);
-
-        var mappedCar = new CarResultViewModel
+        try
         {
-            Name = updatedCarInput.Name,
-            VehicleBrand = updatedCarInput.VehicleBrand,
-            Price = updatedCarInput.Price
-        };
+            var car = await _carsCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
 
-        return mappedCar;
+            if (car is null)
+                throw new Exception($"Car with id {id} not found!");
+
+            car.Name = updatedCarInput.Name;
+            car.VehicleBrand = updatedCarInput.VehicleBrand;
+            car.Price = updatedCarInput.Price;
+
+            await _carsCollection.ReplaceOneAsync(x => x.Id == id, car);
+
+            var mappedCar = new CarResultViewModel
+            {
+                Id = car.Id,
+                VehicleBrand = car.VehicleBrand,
+                Name = car.Name,
+                Price = car.Price
+            };
+
+            serviceResponse.Data = mappedCar;
+        }
+        catch (Exception ex)
+        {
+            serviceResponse.Message = ex.Message;
+            serviceResponse.Success = false;
+        }
+
+        return serviceResponse;
     }
 
     // Remove Car
-    public async Task<CarResultViewModel> RemoveCar(string id)
+    public async Task<ServiceResponse<bool>> RemoveCar(string id)
     {
-        // await _carsCollection.DeleteOneAsync(x => x.Id == id);
-        var deletedCar = await _carsCollection.FindOneAndDeleteAsync(x => x.Id == id);
+        var serviceResponse = new ServiceResponse<bool>();
 
-        if (deletedCar == null) return null;
-
-        var mappedCar = new CarResultViewModel
+        try
         {
-            Id = deletedCar.Id,
-            Name = deletedCar.Name,
-            VehicleBrand = deletedCar.VehicleBrand,
-            Price = deletedCar.Price
-        };
+            var car = await _carsCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
 
-        return mappedCar;
+            if (car is null)
+                throw new Exception($"Car with id {id} not found!");
+
+            await _carsCollection.DeleteOneAsync(x => x.Id == car.Id);
+        }
+        catch (Exception ex)
+        {
+            serviceResponse.Message = ex.Message;
+            serviceResponse.Success = false;
+        }
+
+        return serviceResponse;
     }
 }
