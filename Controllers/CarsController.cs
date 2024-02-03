@@ -7,9 +7,10 @@ namespace CarsMongoDbDemo.Controllers;
 
 public class CarsController : Controller
 {
+    private readonly IValidator<CarInputViewModel> _carInputViewModel;
+
     // DI
     private readonly CarsService _carsService;
-    private readonly IValidator<CarInputViewModel> _carInputViewModel;
 
     public CarsController(CarsService carsService, IValidator<CarInputViewModel> carInputViewModel)
     {

@@ -42,7 +42,7 @@
                     @Html.DisplayFor(modelItem => car.Name)
                 </td>
                 <td>
-                    @($"{car.Price:c}") @* Equivalent to @String.Format("{0:c}", car.Price) *@
+                    @($"{car.Price:c}")
                 </td>
                 <td class="text-center">
                     <a class="btn btn-sm btn-info border-1 m-1" asp-action="Details" asp-route-id="@car.Id">Details</a>

@@ -11,17 +11,19 @@ public class SortingService
         _carsService = carsService;
     }
 
-    // TODO - Improve code logic without using projection?
     public async Task<List<CarResultViewModel>> SortCars(string sortOrder)
     {
         var cars = await _carsService.GetCarsAsync();
-        var mappedCars = cars.Data.Select(x => new CarResultViewModel
-        {
-            Id = x.Id,
-            VehicleBrand = x.VehicleBrand,
-            Name = x.Name,
-            Price = x.Price
-        }).ToList().OrderBy(x => x.VehicleBrand);
+        var mappedCars = cars.Data
+            .Select(x => new CarResultViewModel
+            {
+                Id = x.Id,
+                VehicleBrand = x.VehicleBrand,
+                Name = x.Name,
+                Price = x.Price
+            })
+            .ToList()
+            .OrderBy(x => x.VehicleBrand);
 
         switch (sortOrder)
         {

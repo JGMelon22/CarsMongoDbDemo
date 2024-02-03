@@ -1,3 +1,4 @@
+using System.Globalization;
 using CarsMongoDbDemo.ViewModels.XlsxFile;
 using MiniExcelLibs;
 
@@ -44,7 +45,12 @@ public class FileService
 
         var data = await _carsService.GetCarsAsync();
         var rowsData = data.Data?.Select(item => new
-            { item.Id, item.Name, item.VehicleBrand, Price = item.Price.ToString() });
+        {
+            item.Id,
+            item.Name,
+            item.VehicleBrand, 
+            Price = item.Price.ToString("c", CultureInfo.CurrentCulture)
+        });
 
         await MiniExcel.SaveAsAsync(filePath, rowsData);
     }
