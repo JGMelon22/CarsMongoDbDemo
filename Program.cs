@@ -2,7 +2,6 @@ using CarsMongoDbDemo.Models.Validators;
 using CarsMongoDbDemo.Services;
 using CarsMongoDbDemo.ViewModels.Car;
 using FluentValidation;
-using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,9 +12,7 @@ builder.Services.Configure<CarStoreDatabaseSettings>(
 builder.Services.AddSingleton<CarsService>();
 
 // Fluent Validation
-builder.Services.AddFluentValidationAutoValidation(); // Server Side
-builder.Services.AddFluentValidationAutoValidation()
-    .AddFluentValidationClientsideAdapters(); // Client Sidebuilder.Services.AddScoped<IValidator<AddCarViewModel>, AddCarValidator>();
+builder.Services.AddScoped<IValidator<AddCarViewModel>, AddCarValidator>();
 builder.Services.AddScoped<IValidator<UpdateCarViewModel>, UpdateCarValidator>();
 
 // Add services to the container.

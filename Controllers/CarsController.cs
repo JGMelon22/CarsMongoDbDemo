@@ -1,16 +1,24 @@
+using CarsMongoDbDemo.Controllers.Extensions;
 using CarsMongoDbDemo.Services;
 using CarsMongoDbDemo.ViewModels.Car;
+using FluentValidation;
 
 namespace CarsMongoDbDemo.Controllers;
 
 public class CarsController : Controller
 {
+    private readonly IValidator<AddCarViewModel> _addCarViewModel;
+
     // DI
     private readonly CarsService _carsService;
+    private readonly IValidator<UpdateCarViewModel> _updateCarViewModel;
 
-    public CarsController(CarsService carsService)
+    public CarsController(CarsService carsService, IValidator<AddCarViewModel> addCarViewModel,
+        IValidator<UpdateCarViewModel> updateCarViewModel)
     {
         _carsService = carsService;
+        _addCarViewModel = addCarViewModel;
+        _updateCarViewModel = updateCarViewModel;
     }
 
     // Call cars index view with all results!
@@ -47,8 +55,12 @@ public class CarsController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(AddCarViewModel newCar)
     {
-        if (!ModelState.IsValid)
+        var result = await _addCarViewModel.ValidateAsync(newCar);
+        if (!result.IsValid)
+        {
+            result.AddToModelState(ModelState);
             return View(nameof(Create));
+        }
 
         await _carsService.AddCar(newCar);
 
@@ -69,8 +81,12 @@ public class CarsController : Controller
     [HttpPost]
     public async Task<IActionResult> Edit(UpdateCarViewModel updateCarViewModel)
     {
-        if (!ModelState.IsValid)
+        var result = await _updateCarViewModel.ValidateAsync(updateCarViewModel);
+        if (!result.IsValid)
+        {
+            result.AddToModelState(ModelState);
             return View(nameof(Edit));
+        }
 
         await _carsService.UpdateCar(updateCarViewModel);
 
