@@ -107,7 +107,7 @@ public class CarsController : Controller
     {
         var car = await _carsService.RemoveCar(id);
 
-        return car.Success
+        return car.Success != false
             ? RedirectToAction(nameof(Index))
             : BadRequest();
     }
