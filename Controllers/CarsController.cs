@@ -7,18 +7,14 @@ namespace CarsMongoDbDemo.Controllers;
 
 public class CarsController : Controller
 {
-    private readonly IValidator<CarInputViewModel> _CarInputViewModel;
-
     // DI
     private readonly CarsService _carsService;
-    private readonly IValidator<CarInputViewModel> _updateCarViewModel;
+    private readonly IValidator<CarInputViewModel> _carInputViewModel;
 
-    public CarsController(CarsService carsService, IValidator<CarInputViewModel> CarInputViewModel,
-        IValidator<CarInputViewModel> updateCarViewModel)
+    public CarsController(CarsService carsService, IValidator<CarInputViewModel> carInputViewModel)
     {
         _carsService = carsService;
-        _CarInputViewModel = CarInputViewModel;
-        _updateCarViewModel = updateCarViewModel;
+        _carInputViewModel = carInputViewModel;
     }
 
     // Call cars index view with all results!
@@ -53,7 +49,7 @@ public class CarsController : Controller
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(CarInputViewModel newCar)
     {
-        var result = await _CarInputViewModel.ValidateAsync(newCar);
+        var result = await _carInputViewModel.ValidateAsync(newCar);
         if (!result.IsValid)
         {
             result.AddToModelState(ModelState);
@@ -77,7 +73,7 @@ public class CarsController : Controller
     [HttpPost]
     public async Task<IActionResult> Edit(string id, CarInputViewModel carInputViewModel)
     {
-        var result = await _updateCarViewModel.ValidateAsync(carInputViewModel);
+        var result = await _carInputViewModel.ValidateAsync(carInputViewModel);
         if (!result.IsValid)
         {
             result.AddToModelState(ModelState);
@@ -107,7 +103,7 @@ public class CarsController : Controller
     {
         var car = await _carsService.RemoveCar(id);
 
-        return car.Success != false
+        return car.Success
             ? RedirectToAction(nameof(Index))
             : BadRequest();
     }
