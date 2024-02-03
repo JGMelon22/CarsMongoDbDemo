@@ -36,14 +36,17 @@ public class FileService
     // Create report
     public async Task CreateReport()
     {
-        var folderPath = Path.Combine(Environment.CurrentDirectory, "Files" + Path.DirectorySeparatorChar,
+        var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "Files");
+        var filePath = Path.Combine(folderPath + Path.DirectorySeparatorChar,
             $"{Guid.NewGuid()}.xlsx");
 
+        if (!Directory.Exists(folderPath)) Directory.CreateDirectory(folderPath);
+        
         var data = await _carsService.GetCarsAsync();
         var rowsData = data.Select(item => new
             { item.Id, item.Name, item.VehicleBrand, Price = item.Price.ToString() });
 
-        await MiniExcel.SaveAsAsync(folderPath, rowsData);
+        await MiniExcel.SaveAsAsync(filePath, rowsData);
     }
 
     // Download file
