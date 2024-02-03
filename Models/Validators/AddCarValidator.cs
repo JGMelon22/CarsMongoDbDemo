@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace CarsMongoDbDemo.Models.Validators;
 
-public class AddCarValidator : AbstractValidator<AddCarViewModel>
+public class AddCarValidator : AbstractValidator<CarInputViewModel>
 {
     public AddCarValidator()
     {

@@ -7,17 +7,17 @@ namespace CarsMongoDbDemo.Controllers;
 
 public class CarsController : Controller
 {
-    private readonly IValidator<AddCarViewModel> _addCarViewModel;
+    private readonly IValidator<CarInputViewModel> _CarInputViewModel;
 
     // DI
     private readonly CarsService _carsService;
-    private readonly IValidator<UpdateCarViewModel> _updateCarViewModel;
+    private readonly IValidator<CarInputViewModel> _updateCarViewModel;
 
-    public CarsController(CarsService carsService, IValidator<AddCarViewModel> addCarViewModel,
-        IValidator<UpdateCarViewModel> updateCarViewModel)
+    public CarsController(CarsService carsService, IValidator<CarInputViewModel> CarInputViewModel,
+        IValidator<CarInputViewModel> updateCarViewModel)
     {
         _carsService = carsService;
-        _addCarViewModel = addCarViewModel;
+        _CarInputViewModel = CarInputViewModel;
         _updateCarViewModel = updateCarViewModel;
     }
 
@@ -53,9 +53,9 @@ public class CarsController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create(AddCarViewModel newCar)
+    public async Task<IActionResult> Create(CarInputViewModel newCar)
     {
-        var result = await _addCarViewModel.ValidateAsync(newCar);
+        var result = await _CarInputViewModel.ValidateAsync(newCar);
         if (!result.IsValid)
         {
             result.AddToModelState(ModelState);
@@ -79,16 +79,16 @@ public class CarsController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Edit(UpdateCarViewModel updateCarViewModel)
+    public async Task<IActionResult> Edit(CarInputViewModel carInputViewModel)
     {
-        var result = await _updateCarViewModel.ValidateAsync(updateCarViewModel);
+        var result = await _updateCarViewModel.ValidateAsync(carInputViewModel);
         if (!result.IsValid)
         {
             result.AddToModelState(ModelState);
             return View(nameof(Edit));
         }
 
-        await _carsService.UpdateCar(updateCarViewModel);
+        await _carsService.UpdateCar(carInputViewModel);
 
         return await Task.Run(() => RedirectToAction(nameof(Index)));
     }

@@ -1,6 +1,6 @@
 namespace CarsMongoDbDemo.ViewModels.Car;
 
-public record GetCarViewModel
+public record CarResultViewModel
 {
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]

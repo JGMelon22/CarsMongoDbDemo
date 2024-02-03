@@ -12,8 +12,8 @@ builder.Services.Configure<CarStoreDatabaseSettings>(
 builder.Services.AddSingleton<CarsService>();
 
 // Fluent Validation
-builder.Services.AddScoped<IValidator<AddCarViewModel>, AddCarValidator>();
-builder.Services.AddScoped<IValidator<UpdateCarViewModel>, UpdateCarValidator>();
+builder.Services.AddScoped<IValidator<CarInputViewModel>, AddCarValidator>();
+builder.Services.AddScoped<IValidator<CarInputViewModel>, UpdateCarValidator>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

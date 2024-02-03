@@ -11,10 +11,10 @@ public class SortingService
         _carsService = carsService;
     }
 
-    public async Task<List<GetCarViewModel>> SortCars(string sortOrder)
+    public async Task<List<CarResultViewModel>> SortCars(string sortOrder)
     {
         var cars = await _carsService.GetCarsAsync();
-        var mappedCars = cars.Select(x => new GetCarViewModel
+        var mappedCars = cars.Select(x => new CarResultViewModel
         {
             Id = x.Id,
             VehicleBrand = x.VehicleBrand,
