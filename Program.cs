@@ -1,3 +1,4 @@
+using CarsMongoDbDemo.Interfaces;
 using CarsMongoDbDemo.Models.Validators;
 using CarsMongoDbDemo.Services;
 using CarsMongoDbDemo.ViewModels.Car;
@@ -9,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<CarStoreDatabaseSettings>(
     builder.Configuration.GetSection("CarStoreDatabase"));
 
-builder.Services.AddSingleton<CarsService>();
+builder.Services.AddSingleton<ICarsService, CarsService>();
 
 // Fluent Validation
 builder.Services.AddScoped<IValidator<CarInputViewModel>, AddCarValidator>();

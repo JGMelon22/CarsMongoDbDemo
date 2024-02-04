@@ -1,12 +1,13 @@
+using CarsMongoDbDemo.Interfaces;
 using CarsMongoDbDemo.ViewModels.Car;
 
 namespace CarsMongoDbDemo.Services;
 
 public class SortingService
 {
-    private readonly CarsService _carsService;
+    private readonly ICarsService _carsService;
 
-    public SortingService(CarsService carsService)
+    public SortingService(ICarsService carsService)
     {
         _carsService = carsService;
     }

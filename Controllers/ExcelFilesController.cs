@@ -1,13 +1,13 @@
+using CarsMongoDbDemo.Interfaces;
 using CarsMongoDbDemo.Services;
 
 namespace CarsMongoDbDemo.Controllers;
 
 public class ExcelFilesController : Controller
 {
-    // DI
-    private readonly CarsService _carsService;
+    private readonly ICarsService _carsService;
 
-    public ExcelFilesController(CarsService carsService)
+    public ExcelFilesController(ICarsService carsService)
     {
         _carsService = carsService;
     }

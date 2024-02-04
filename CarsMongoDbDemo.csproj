@@ -29,4 +29,22 @@
         <None Remove="Configuration\**"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <_ContentIncludedByDefault Remove="CarsMongoDbDemo.Tests\bin\Debug\net8.0\appsettings.Development.json"/>
+        <_ContentIncludedByDefault Remove="CarsMongoDbDemo.Tests\bin\Debug\net8.0\appsettings.json"/>
+        <_ContentIncludedByDefault Remove="CarsMongoDbDemo.Tests\bin\Debug\net8.0\carsData.json"/>
+        <_ContentIncludedByDefault Remove="CarsMongoDbDemo.Tests\bin\Debug\net8.0\CarsMongoDbDemo.deps.json"/>
+        <_ContentIncludedByDefault Remove="CarsMongoDbDemo.Tests\bin\Debug\net8.0\CarsMongoDbDemo.runtimeconfig.json"/>
+        <_ContentIncludedByDefault Remove="CarsMongoDbDemo.Tests\bin\Debug\net8.0\CarsMongoDbDemo.staticwebassets.runtime.json"/>
+        <_ContentIncludedByDefault Remove="CarsMongoDbDemo.Tests\bin\Debug\net8.0\CarsMongoDbDemo.Tests.deps.json"/>
+        <_ContentIncludedByDefault Remove="CarsMongoDbDemo.Tests\bin\Debug\net8.0\CarsMongoDbDemo.Tests.runtimeconfig.json"/>
+        <_ContentIncludedByDefault Remove="CarsMongoDbDemo.Tests\bin\Debug\net8.0\CarsMongoDbDemo.Tests\obj\CarsMongoDbDemo.Tests.csproj.nuget.dgspec.json"/>
+        <_ContentIncludedByDefault Remove="CarsMongoDbDemo.Tests\bin\Debug\net8.0\CarsMongoDbDemo.Tests\obj\project.assets.json"/>
+        <_ContentIncludedByDefault Remove="CarsMongoDbDemo.Tests\bin\Debug\net8.0\CarsMongoDbDemo.Tests\obj\project.packagespec.json"/>
+        <_ContentIncludedByDefault Remove="CarsMongoDbDemo.Tests\obj\CarsMongoDbDemo.Tests.csproj.nuget.dgspec.json"/>
+        <_ContentIncludedByDefault Remove="CarsMongoDbDemo.Tests\obj\Debug\net8.0\CarsMongoDbDemo.Tests.sourcelink.json"/>
+        <_ContentIncludedByDefault Remove="CarsMongoDbDemo.Tests\obj\project.assets.json"/>
+        <_ContentIncludedByDefault Remove="CarsMongoDbDemo.Tests\obj\project.packagespec.json"/>
+    </ItemGroup>
+
 </Project>

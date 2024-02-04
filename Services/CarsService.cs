@@ -1,10 +1,11 @@
+using CarsMongoDbDemo.Interfaces;
 using CarsMongoDbDemo.ViewModels.Car;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
 namespace CarsMongoDbDemo.Services;
 
-public class CarsService
+public class CarsService : ICarsService
 {
     private readonly IMongoCollection<Car> _carsCollection;
 

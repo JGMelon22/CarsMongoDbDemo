@@ -1,4 +1,5 @@
 using System.Globalization;
+using CarsMongoDbDemo.Interfaces;
 using CarsMongoDbDemo.ViewModels.XlsxFile;
 using MiniExcelLibs;
 
@@ -6,9 +7,9 @@ namespace CarsMongoDbDemo.Services;
 
 public class FileService
 {
-    private readonly CarsService _carsService;
+    private readonly ICarsService _carsService;
 
-    public FileService(CarsService carsService)
+    public FileService(ICarsService carsService)
     {
         _carsService = carsService;
     }
@@ -48,7 +49,7 @@ public class FileService
         {
             item.Id,
             item.Name,
-            item.VehicleBrand, 
+            item.VehicleBrand,
             Price = item.Price.ToString("c", CultureInfo.CurrentCulture)
         });
 

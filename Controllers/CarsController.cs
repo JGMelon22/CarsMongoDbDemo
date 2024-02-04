@@ -1,4 +1,5 @@
 using CarsMongoDbDemo.Controllers.Extensions;
+using CarsMongoDbDemo.Interfaces;
 using CarsMongoDbDemo.Services;
 using CarsMongoDbDemo.ViewModels.Car;
 using FluentValidation;
@@ -8,11 +9,9 @@ namespace CarsMongoDbDemo.Controllers;
 public class CarsController : Controller
 {
     private readonly IValidator<CarInputViewModel> _carInputViewModel;
+    private readonly ICarsService _carsService;
 
-    // DI
-    private readonly CarsService _carsService;
-
-    public CarsController(CarsService carsService, IValidator<CarInputViewModel> carInputViewModel)
+    public CarsController(ICarsService carsService, IValidator<CarInputViewModel> carInputViewModel)
     {
         _carsService = carsService;
         _carInputViewModel = carInputViewModel;
@@ -22,12 +21,12 @@ public class CarsController : Controller
     [HttpGet]
     public async Task<IActionResult> Index(string sortOrder)
     {
-        var sortingService = new SortingService(_carsService); // Sort service
-        ViewBag.BrandSortParam = string.IsNullOrEmpty(sortOrder) ? "brand_desc" : "";
+        var sortingService = new SortingService(_carsService);
+        ViewBag.BrandSortParam = string.IsNullOrEmpty(sortOrder) ? "brand_desc" : ""; // Sort service
 
         var cars = await sortingService.SortCars(sortOrder);
         return cars != null
-            ? await Task.Run(() => View(cars))
+            ? View(cars)
             : NoContent();
     }
 
